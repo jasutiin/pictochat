@@ -5,4 +5,16 @@
 
 * {
   font-family: nds;
+  margin: 0px;
+  padding: 0px;
+}
+
+#app {
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  background-size: 20px 20px;
+  background-color: #484848;
+  background-image: linear-gradient(to right, #3d3d3d 2px, transparent 1px),
+    linear-gradient(to bottom, #3d3d3d 1px, transparent 2px);
 }

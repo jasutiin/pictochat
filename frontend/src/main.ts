@@ -10,11 +10,11 @@ import RoomSelect from './pages/RoomSelect.vue';
 const routes = [
   { path: '/', component: Login },
   { path: '/room-select', component: RoomSelect },
-  { path: '/room:id', component: Room },
+  { path: '/room/:id', component: Room },
 ];
 
 const router = createRouter({
-  history: createMemoryHistory(),
+  history: createMemoryHistory(), // hides the url parameters like /room:id (unlike createWebHistory)
   routes,
 });
 
