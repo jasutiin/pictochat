@@ -1,0 +1,8 @@
+@font-face {
+  font-family: nds;
+  src: url('nds.ttf');
+}
+
+* {
+  font-family: nds;
+}
