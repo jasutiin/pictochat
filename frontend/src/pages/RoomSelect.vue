@@ -4,18 +4,16 @@
   <div class="container">
     <div class="top-container"></div>
     <div class="bottom-container">
-      <div class="design">Choose a Chat Room to join.</div>
-      <div class="content">
-        <h1>Room Select</h1>
-        <nav>
-          <RouterLink to="/room/1">Room 1</RouterLink>
-          <RouterLink to="/room/2">Room 2</RouterLink>
-          <RouterLink to="/room/3">Room 3</RouterLink>
-          <RouterLink to="/room/4">Room 4</RouterLink>
-          <RouterLink to="/">Back</RouterLink>
-        </nav>
+      <div class="design">
+        Choose a Chat Room to join. <RouterLink to="/">Back</RouterLink>
       </div>
-
+      <nav>
+        <RouterLink to="/room/1" class="item">Chat Room A</RouterLink>
+        <RouterLink to="/room/2" class="item">Chat Room B</RouterLink>
+        <RouterLink to="/room/3" class="item">Chat Room C</RouterLink>
+        <RouterLink to="/room/4" class="item">Chat Room D</RouterLink>
+        <RouterLink to="/room/5" class="item">Chat Room E</RouterLink>
+      </nav>
       <div class="design"></div>
     </div>
   </div>
@@ -24,19 +22,19 @@
 <style scoped>
 .container {
   display: flex;
-  width: 100%;
+  width: 600px;
   display: flex;
   flex-direction: column;
-  flex: 1;
   justify-content: center;
   align-items: center;
+  font-size: xx-large;
 }
 
 .bottom-container {
-  width: 100%;
+  width: inherit;
   display: flex;
   flex-direction: column;
-  flex: 1;
+  height: 50%;
   justify-content: center;
   align-items: center;
   background-color: white;
@@ -46,8 +44,8 @@
 }
 
 .top-container {
-  width: 100%;
-  flex: 1;
+  width: inherit;
+  height: 50%;
   background-color: white;
   background-size: 60px 60px;
   background-image: linear-gradient(to right, #ababab 1px, transparent 3px),
@@ -58,30 +56,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 0.2;
-  margin: auto;
+  height: 150px;
   background-color: royalblue;
   width: 100%;
-  font-size: x-large;
-}
-
-.content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex: 1;
 }
 
 nav {
   display: flex;
+  /* position: absolute; */
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: inherit;
+  overflow-y: scroll;
+  height: 100%;
 }
 
-@media screen and (min-width: 426px) {
+.item {
+  display: flex;
+  align-items: center;
+  background-color: grey;
+  height: 300px;
+}
+
+@media (max-width: 426px) {
   .container {
-    max-width: 500px;
+    width: 100vw;
   }
 }
 </style>

@@ -11,7 +11,7 @@
 
 <style scoped>
 .container {
-  width: 100%;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -22,22 +22,21 @@
     linear-gradient(to bottom, #ababab 1px, transparent 3px);
 }
 
-@media screen and (min-width: 426px) {
+.item {
+  margin: 10px;
+}
+
+input {
+  height: 25px;
+  width: 180px;
+  font-size: xx-large;
+  border: 3px solid black;
+  padding: 5px;
+}
+
+@media (max-width: 426px) {
   .container {
-    max-width: 500px;
-    height: 100%;
-  }
-
-  .item {
-    margin: 10px;
-  }
-
-  input {
-    height: 25px;
-    width: 180px;
-    font-size: xx-large;
-    border: 3px solid black;
-    padding: 5px;
+    width: 100vw;
   }
 }
 </style>

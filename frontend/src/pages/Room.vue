@@ -9,7 +9,7 @@
 
 <style scoped>
 .container {
-  width: 100%;
+  width: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,9 +24,9 @@
   margin: 10px;
 }
 
-@media screen and (min-width: 426px) {
+@media (max-width: 426px) {
   .container {
-    max-width: 500px;
+    width: 100vw;
   }
 }
 </style>
