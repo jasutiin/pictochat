@@ -1,16 +1,10 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import UpperScreen from '../components/UpperScreen.vue';
+</script>
 
 <template>
   <div class="container">
-    <div class="top-container">
-      <div class="white-bar">
-        <div class="square-top"></div>
-        <div class="square-bot"></div>
-      </div>
-      <div class="inner">
-        <div class="title">Pictochat</div>
-      </div>
-    </div>
+    <UpperScreen />
     <div class="bottom-container">
       <div class="design">
         <span class="head">Choose a Chat Room to join.</span>
@@ -56,7 +50,7 @@
   justify-content: center;
   align-items: center;
   font-size: xx-large;
-  background-color: #c9c9c9;
+  background-color: #8d8d8d;
   background-size: 15px 15px;
   background-image: linear-gradient(to bottom, white 1px, transparent 3px);
 }
@@ -68,53 +62,6 @@
   height: 50%;
   justify-content: center;
   align-items: center;
-}
-
-.top-container {
-  display: flex;
-  width: inherit;
-  height: 50%;
-}
-
-.title {
-  display: flex;
-  padding: 10px;
-  align-items: center;
-  height: 20px;
-  border: 3px solid white;
-  border-radius: 20px;
-  background-color: grey;
-  color: white;
-  margin: 10px;
-}
-
-.white-bar {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  background-color: white;
-  width: 40px;
-}
-
-.inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: end;
-  height: 100%;
-  flex: 1;
-}
-
-.square-top {
-  width: 40px;
-  height: 40px;
-  border-bottom: 1px dotted black;
-}
-
-.square-bot {
-  width: 40px;
-  height: 40px;
-  border-top: 1px dotted black;
 }
 
 .design {
