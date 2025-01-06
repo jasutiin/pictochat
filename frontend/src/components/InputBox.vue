@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="input-container"></div>
+  <canvas class="input-container"></canvas>
 </template>
 
 <style scoped>

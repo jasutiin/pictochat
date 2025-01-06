@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import UpperScreen from '../components/UpperScreen.vue';
-import Keyboard from '../components/Keyboard.vue';
+import Keyboard from '../components/Keyboard/Keyboard.vue';
 import InputBox from '../components/InputBox.vue';
 import Sidebar from '../components/Sidebar.vue';
 </script>
