@@ -40,7 +40,8 @@ import Sidebar from '../components/Sidebar.vue';
   flex-direction: row;
   height: 50%;
   justify-content: center;
-  align-items: center;
+  /* border-top: 8px solid #006eff54; */
+  /* align-items: center; */
 }
 
 .exit {
@@ -49,7 +50,6 @@ import Sidebar from '../components/Sidebar.vue';
   width: inherit;
   background: white;
   justify-content: end;
-  /* align-items: center; */
 }
 
 .item {
