@@ -1,4 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from 'vue';
+
+// ensure that the component is mounted before
+onMounted(() => {
+  const canvas = document.getElementsByClassName(
+    'input-container'
+  )[0] as HTMLCanvasElement;
+  const ctx = canvas.getContext('2d');
+
+  if (ctx) {
+    ctx.font = '15px Arial';
+    ctx.fillText('Hello World', 80, 25);
+  }
+});
+</script>
 
 <template>
   <canvas class="input-container"></canvas>
