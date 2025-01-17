@@ -1,8 +1,31 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
+
 import UpperScreen from '../components/UpperScreen.vue';
 import Keyboard from '../components/Keyboard/Keyboard.vue';
 import InputBox from '../components/InputBox.vue';
 import Sidebar from '../components/Sidebar.vue';
+
+const message = ref('');
+
+const fetchMessage = async () => {
+  try {
+    const response = await fetch('http://localhost:8080/api/messages');
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.text();
+    message.value = data;
+  } catch (error) {
+    console.error('Error fetching data:', error);
+  }
+};
+
+onMounted(() => {
+  fetchMessage();
+});
 </script>
 
 <template>
@@ -12,7 +35,7 @@ import Sidebar from '../components/Sidebar.vue';
       <Sidebar />
       <div class="right">
         <div class="exit">
-          <RouterLink to="/room-select" class="item">X</RouterLink>
+          <RouterLink to="/room-select" class="item">{{ message }}</RouterLink>
         </div>
         <div class="border">
           <InputBox />

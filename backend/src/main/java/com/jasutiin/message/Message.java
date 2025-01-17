@@ -1,4 +1,4 @@
-package com.jasutiin.model;
+package com.jasutiin.message;
 
 import java.time.LocalDateTime;
 

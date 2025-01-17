@@ -1,4 +1,4 @@
-package com.jasutiin.model;
+package com.jasutiin.user;
 
 public class User {
     private String username;
