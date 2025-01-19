@@ -1,16 +1,14 @@
 package com.jasutiin.message;
 
-import java.time.LocalDateTime;
-
 public class Message {
     private String username;
     private String content;
-    private LocalDateTime timestamp;
+    private String messageType; // either connect, disconnect, or message
 
-    public Message(String username, String content, LocalDateTime timestamp) {
+    public Message(String username, String content, String messageType) {
         this.username = username;
         this.content = content;
-        this.timestamp = timestamp;
+        this.messageType = messageType;
     }
 
     public String getUsername() {
@@ -29,11 +27,11 @@ public class Message {
         this.content = content;
     }
 
-    public LocalDateTime getTimestamp() {
-        return timestamp;
+    public String getMessageType() {
+        return messageType;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
-        this.timestamp = timestamp;
+    public void setMessageType(String messageType) {
+        this.messageType = messageType;
     }
 }

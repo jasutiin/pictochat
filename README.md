@@ -9,12 +9,11 @@
   <a href="https://www.java.com/en/" target="blank"><img alt="Java" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" /></a>
   <a href="https://vuejs.org/" target="blank"><img alt="Vue" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg" /></a>
   <a href="https://spring.io/projects/spring-boot" target="blank"><img alt="Spring Boot" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" /></a>
-  <a href="https://www.postgresql.org/" target="blank"><img alt="PostgreSQL" width="30px" style="padding-right:10px;" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" /></a>
 </div>
 
 ## Setup and Installation
+
 To run this application, you will need the following tools installed:
 
 - **Java 23**: Download and install Java 23 from [here](https://www.oracle.com/ca-en/java/technologies/downloads/).
 - **Spring Boot 3.4.1**: This project uses Spring Boot 3.4.1 for backend development.
-- **PostgreSQL**: Set up PostgreSQL for database management. You can download PostgreSQL from [here](https://www.postgresql.org/).

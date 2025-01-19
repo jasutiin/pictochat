@@ -3,4 +3,4 @@ server:
 
 spring:
   main:
-    web-application-type: reactive
+    web-application-type: servlet
