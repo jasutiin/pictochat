@@ -8,7 +8,6 @@ import UpperScreen from '../components/UpperScreen.vue';
     <div class="bottom-container">
       <div class="design">
         <span class="head">Choose a Chat Room to join.</span>
-        <RouterLink to="/" class="back">Back</RouterLink>
       </div>
       <nav>
         <RouterLink to="/room/A" class="item">

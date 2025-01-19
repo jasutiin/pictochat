@@ -1,11 +1,30 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { global } from '../global/user.ts';
+import { useRouter } from 'vue-router';
+
+const router = useRouter();
+
+const changeUsername = () => {
+  global.username = (
+    document.getElementById('username') as HTMLInputElement
+  ).value;
+
+  if (global.username === '' || global.username === null) {
+    alert("can't have empty username");
+  } else {
+    router.push('/room-select');
+  }
+};
+</script>
 
 <template>
   <div class="container">
-    <RouterLink to="/room-select" class="item"
-      ><h1>Connect to Pictochat</h1></RouterLink
-    >
-    <form class="item"><input type="text" placeholder="Username" /></form>
+    <form>
+      <button class="connect" :onclick="changeUsername">
+        <h1>Connect to Pictochat</h1>
+      </button>
+      <input id="username" type="text" placeholder="Username" />
+    </form>
   </div>
 </template>
 
@@ -24,6 +43,20 @@
 
 .item {
   margin: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.connect {
+  border: none;
+  margin-bottom: 20px;
+  font-size: large;
+  background: none;
+  cursor: pointer;
 }
 
 input {
