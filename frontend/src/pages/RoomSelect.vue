@@ -1,26 +1,17 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue';
 import UpperScreen from '../components/UpperScreen.vue';
+import { ref, onMounted } from 'vue';
+import { getCount } from '../api/chatCount';
 
 const data = ref<any>(null);
 
-async function getCount() {
-  const url = 'http://localhost:8080/getCount';
+onMounted(async () => {
   try {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    data.value = json;
+    data.value = await getCount();
+    console.log(data.value);
   } catch (error) {
-    console.error(error.message);
+    console.error('Failed to fetch chat room data:', error);
   }
-}
-
-onMounted(() => {
-  getCount();
 });
 </script>
 

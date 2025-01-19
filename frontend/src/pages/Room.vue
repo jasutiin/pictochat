@@ -10,57 +10,20 @@ import Sidebar from '../components/Sidebar.vue';
 import { onBeforeUnmount, ref } from 'vue';
 import { Client } from '@stomp/stompjs';
 import { useRoute } from 'vue-router';
+
 import { global } from '../global/user.ts';
+import { incrementCount } from '../api/chatCount.ts';
+import { decrementCount } from '../api/chatCount.ts';
 
 const route = useRoute();
 const roomLetter = route.params.id;
 const messageList = ref<any[]>([]);
-
-const myHeaders = new Headers();
-myHeaders.append('Content-Type', 'application/json');
-
-async function decrementCount() {
-  const url = 'http://localhost:8080/decrementCount';
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({ chat: `room${roomLetter}` }),
-      headers: myHeaders,
-    });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.error(error.message);
-  }
-}
-
-async function incrementCount() {
-  const url = 'http://localhost:8080/incrementCount';
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      body: JSON.stringify({ chat: `room${roomLetter}` }),
-      headers: myHeaders,
-    });
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
-
-    const json = await response.json();
-    console.log(json);
-  } catch (error) {
-    console.error(error.message);
-  }
-}
+console.log(roomLetter);
 
 const client = new Client({
   brokerURL: `ws://localhost:8080/chat`,
   connectHeaders: {
-    login: `${global.username}`, // change to username of user
+    login: `${global.username}`,
     passcode: 'password', // keep this, i don't think it matters
   },
   debug: function (hey: string) {
@@ -77,7 +40,7 @@ const client = new Client({
     client.publish({
       destination: `/topic/room${roomLetter}`,
       body: JSON.stringify({
-        username: `${global.username}`, // change to username of user
+        username: `${global.username}`,
         content: `${global.username} joined`,
         messageType: 'connect',
       }),
@@ -86,19 +49,19 @@ const client = new Client({
 });
 
 client.activate();
-incrementCount();
+await incrementCount(roomLetter);
 
-onBeforeUnmount(() => {
+onBeforeUnmount(async () => {
   client.publish({
     destination: `/topic/room${roomLetter}`,
     body: JSON.stringify({
-      username: `${global.username}`, // change to username of user
+      username: `${global.username}`,
       content: `${global.username} left`,
       messageType: 'disconnect',
     }),
   });
   client.deactivate();
-  decrementCount();
+  await decrementCount(roomLetter);
   messageList.value = [];
 });
 </script>
