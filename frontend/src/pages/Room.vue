@@ -1,41 +1,72 @@
-<script setup lang="ts">
-import { ref, onMounted } from 'vue';
+<!-- https://stackoverflow.com/questions/57643096/stomp-destination-url-vs-endpoint-url -->
+<!-- https://stomp-js.github.io/guide/stompjs/using-stompjs-v5.html -->
 
+<script setup lang="ts">
 import UpperScreen from '../components/UpperScreen.vue';
 import Keyboard from '../components/Keyboard/Keyboard.vue';
 import InputBox from '../components/InputBox.vue';
 import Sidebar from '../components/Sidebar.vue';
 
-const message = ref('');
+import { onBeforeUnmount, ref } from 'vue';
+import { Client } from '@stomp/stompjs';
+import { useRoute } from 'vue-router';
 
-const fetchMessage = async () => {
-  try {
-    const response = await fetch('http://localhost:8080/api/messages');
+const route = useRoute();
+const roomLetter = route.params.id;
+const messageList = ref<any[]>([]);
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
+const client = new Client({
+  brokerURL: `ws://localhost:8080/chat`,
+  connectHeaders: {
+    login: 'user', // change to username of user
+    passcode: 'password', // keep this, i don't think it matters
+  },
+  debug: function (hey: string) {
+    console.log(hey);
+  },
+  reconnectDelay: 5000, // if connection to websocket fails, try again in 5s
+  heartbeatIncoming: 4000, // interval of checking if websocket connection is still live
+  heartbeatOutgoing: 4000,
+  onConnect: () => {
+    client.subscribe(`/topic/room${roomLetter}`, (message) => {
+      const parsedMessage = JSON.parse(message.body);
+      messageList.value.push(parsedMessage);
+    });
+    client.publish({
+      destination: `/topic/room${roomLetter}`,
+      body: JSON.stringify({
+        username: 'hey', // change to username of user
+        content: 'hey joined',
+        messageType: 'connect',
+      }),
+    });
+  },
+});
 
-    const data = await response.text();
-    message.value = data;
-  } catch (error) {
-    console.error('Error fetching data:', error);
-  }
-};
+client.activate();
 
-onMounted(() => {
-  fetchMessage();
+onBeforeUnmount(() => {
+  client.publish({
+    destination: `/topic/room${roomLetter}`,
+    body: JSON.stringify({
+      username: 'hey', // change to username of user
+      content: 'hey left',
+      messageType: 'disconnect',
+    }),
+  });
+  client.deactivate();
+  messageList.value = [];
 });
 </script>
 
 <template>
   <div class="container">
-    <UpperScreen />
+    <UpperScreen :messages="messageList" />
     <div class="bottom-container">
       <Sidebar />
       <div class="right">
         <div class="exit">
-          <RouterLink to="/room-select" class="item">{{ message }}</RouterLink>
+          <RouterLink to="/room-select" class="item">X</RouterLink>
         </div>
         <div class="border">
           <InputBox />

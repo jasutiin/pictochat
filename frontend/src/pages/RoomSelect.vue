@@ -4,7 +4,7 @@ import UpperScreen from '../components/UpperScreen.vue';
 
 <template>
   <div class="container">
-    <UpperScreen />
+    <UpperScreen room="Pictochat" :messages="[]" />
     <div class="bottom-container">
       <div class="design">
         <span class="head">Choose a Chat Room to join.</span>
