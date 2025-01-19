@@ -1,5 +1,27 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import UpperScreen from '../components/UpperScreen.vue';
+
+const data = ref<any>(null);
+
+async function getCount() {
+  const url = 'http://localhost:8080/getCount';
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    data.value = json;
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+onMounted(() => {
+  getCount();
+});
 </script>
 
 <template>
@@ -13,22 +35,22 @@ import UpperScreen from '../components/UpperScreen.vue';
         <RouterLink to="/room/A" class="item">
           <div class="letter">A</div>
           Chat Room A
-          <div class="member-count">0/16</div>
+          <div class="member-count">{{ data?.roomA?.numberOfUsers }}/16</div>
         </RouterLink>
         <RouterLink to="/room/B" class="item">
           <div class="letter">B</div>
           Chat Room B
-          <div class="member-count">0/16</div>
+          <div class="member-count">{{ data?.roomB?.numberOfUsers }}/16</div>
         </RouterLink>
         <RouterLink to="/room/C" class="item">
           <div class="letter">C</div>
           Chat Room C
-          <div class="member-count">0/16</div>
+          <div class="member-count">{{ data?.roomC?.numberOfUsers }}/16</div>
         </RouterLink>
         <RouterLink to="/room/D" class="item">
           <div class="letter">D</div>
           Chat Room D
-          <div class="member-count">0/16</div>
+          <div class="member-count">{{ data?.roomD?.numberOfUsers }}/16</div>
         </RouterLink>
         <RouterLink to="/room/E" class="item">
           <div class="letter">E</div>

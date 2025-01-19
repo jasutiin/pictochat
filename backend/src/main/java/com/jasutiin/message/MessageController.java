@@ -1,12 +1,11 @@
-package com.jasutiin.chat;
+package com.jasutiin.message;
 
-import com.jasutiin.message.Message;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ChatRoomController {
+public class MessageController {
     @MessageMapping("/joinA")
     @SendTo("/topic/roomA")
     public Message messageRoomA(Message message) throws Exception {

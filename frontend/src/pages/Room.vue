@@ -16,6 +16,47 @@ const route = useRoute();
 const roomLetter = route.params.id;
 const messageList = ref<any[]>([]);
 
+const myHeaders = new Headers();
+myHeaders.append('Content-Type', 'application/json');
+
+async function decrementCount() {
+  const url = 'http://localhost:8080/decrementCount';
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ chat: `room${roomLetter}` }),
+      headers: myHeaders,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
+async function incrementCount() {
+  const url = 'http://localhost:8080/incrementCount';
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      body: JSON.stringify({ chat: `room${roomLetter}` }),
+      headers: myHeaders,
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+
+    const json = await response.json();
+    console.log(json);
+  } catch (error) {
+    console.error(error.message);
+  }
+}
+
 const client = new Client({
   brokerURL: `ws://localhost:8080/chat`,
   connectHeaders: {
@@ -45,6 +86,7 @@ const client = new Client({
 });
 
 client.activate();
+incrementCount();
 
 onBeforeUnmount(() => {
   client.publish({
@@ -56,6 +98,7 @@ onBeforeUnmount(() => {
     }),
   });
   client.deactivate();
+  decrementCount();
   messageList.value = [];
 });
 </script>
